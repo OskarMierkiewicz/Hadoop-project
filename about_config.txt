@@ -1,0 +1,81 @@
+Oto opis każdej linii konfiguracji w pliku config:
+
+1. CORE-SITE.XML_fs.default.name=hdfs://namenode
+Określa domyślną lokalizację systemu plików, która jest ustawiona na hdfs://namenode. Oznacza to, że Hadoop będzie korzystał z HDFS (Hadoop Distributed File System), a namenode będzie jego głównym punktem dostępu.
+
+2. CORE-SITE.XML_fs.defaultFS=hdfs://namenode
+Podobnie jak poprzednia linia, ustawia domyślną lokalizację systemu plików na hdfs://namenode, co wskazuje na korzystanie z HDFS.
+
+3. HDFS-SITE.XML_dfs.namenode.rpc-address=namenode:8020
+Określa adres RPC (Remote Procedure Call) dla NameNode jako namenode:8020. RPC jest używane do komunikacji z NameNode w HDFS.
+
+4. HDFS-SITE.XML_dfs.replication=1
+Ustawia liczbę replik dla danych w HDFS na 1. Oznacza to, że dane w HDFS będą miały tylko jedną kopię, co jest niskim poziomem tolerancji na awarie, ale może być przydatne w środowiskach testowych.
+
+5. MAPRED-SITE.XML_mapreduce.framework.name=yarn
+Określa, że framework MapReduce ma być uruchamiany na platformie YARN, która jest menedżerem zasobów dla aplikacji w Hadoopie.
+
+6. MAPRED-SITE.XML_yarn.app.mapreduce.am.env=HADOOP_MAPRED_HOME=$HADOOP_HOME
+Ustala zmienną środowiskową dla ApplicationMaster w MapReduce, wskazując ścieżkę do katalogu HADOOP_MAPRED_HOME jako zmienna środowiskowa.
+
+7. MAPRED-SITE.XML_mapreduce.map.env=HADOOP_MAPRED_HOME=$HADOOP_HOME
+Ustala zmienną środowiskową dla zadań Map w MapReduce, wskazując ścieżkę do katalogu HADOOP_MAPRED_HOME jako zmienna środowiskowa.
+
+8. MAPRED-SITE.XML_mapreduce.reduce.env=HADOOP_MAPRED_HOME=$HADOOP_HOME
+Ustala zmienną środowiskową dla zadań Reduce w MapReduce, wskazując ścieżkę do katalogu HADOOP_MAPRED_HOME jako zmienna środowiskowa.
+
+9. YARN-SITE.XML_yarn.resourcemanager.hostname=resourcemanager
+Określa nazwę hosta dla Resource Manager w YARN. Resource Manager jest odpowiedzialny za przydzielanie zasobów aplikacjom w klastrze Hadoop.
+
+10. YARN-SITE.XML_yarn.nodemanager.pmem-check-enabled=false
+Wyłącza sprawdzanie fizycznej pamięci RAM na NodeManagerze w YARN. Może być przydatne w celu dostosowania konfiguracji pod konkretne wymagania.
+
+11. YARN-SITE.XML_yarn.nodemanager.delete.debug-delay-sec=600
+Ustawia opóźnienie (w sekundach) przed usunięciem zasobów debugowania na NodeManagerze w YARN. To może pomóc w analizie problemów w środowisku debugowania.
+
+12. YARN-SITE.XML_yarn.nodemanager.vmem-check-enabled=false
+Wyłącza sprawdzanie wirtualnej pamięci na NodeManagerze w YARN. Podobnie jak w przypadku pmem-check-enabled, może to być przydatne w dostosowaniu konfiguracji.
+
+13. YARN-SITE.XML_yarn.nodemanager.aux-services=mapreduce_shuffle
+Określa dodatkowe usługi NodeManagera, a w tym przypadku jest to mapreduce_shuffle. Jest to konieczne dla MapReduce do poprawnego działania.
+
+14. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.maximum-applications=10000
+Określa maksymalną liczbę aplikacji, które mogą być obsługiwane przez CapacityScheduler w YARN.
+
+15. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.maximum-am-resource-percent=0.1
+Określa maksymalny procent zasobów, które ApplicationMaster może przydzielić sobie w CapacityScheduler w YARN.
+
+16. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.resource-calculator=org.apache.hadoop.yarn.util.resource.DefaultResourceCalculator
+Ustawia kalkulator zasobów dla CapacityScheduler na domyślny kalkulator w Hadoopie.
+
+17. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.queues=default
+Definiuje główną kolejkę (root queue) w CapacityScheduler, która jest nazwana "default".
+
+18. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.capacity=100
+Ustala pojemność (w procentach) dla głównej kolejki "default" na 100%, co oznacza, że ​​może ona zużywać wszystkie dostępne zasoby.
+
+19. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.user-limit-factor=1
+Określa współczynnik limitu użytkownika dla kolejki "default". W tym przypadku jest to 1, co oznacza, że użytkownicy nie są ograniczeni w korzystaniu z tej kolejki.
+
+20. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.maximum-capacity=100
+Ustala maksymalną pojemność kolejki "default" na 100%, co oznacza, że ​​nie może przekroczyć jej przydzielonych zasobów.
+
+21. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.state=RUNNING
+Ustawia stan kolejki "default" na "RUNNING", co oznacza, że ​​jest ona dostępna do użycia.
+
+22. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.acl_submit_applications=*
+Umożliwia wszystkim użytkownikom przesyłanie aplikacji do kolejki "default".
+
+23. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.acl_administer_queue=*
+Umożliwia wszystkim użytkownikom zarządzanie kolejką "default".
+
+24. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.node-locality-delay=40
+Określa opóźnienie lokalności węzła (node locality delay) na 40 ms. To opóźnienie kontroluje, jak szybko aplikacja może uzyskać dostęp do węzłów, które są już wypełnione zadaniami.
+
+25. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.queue-mappings=
+Pusta linia, co oznacza, że ​​nie są zdefiniowane żadne odwzorowania kolejkowe.
+
+26. CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.queue-mappings-override.enable=false
+Wyłącza nadpisywanie odwzorowań kolejkowych, jeśli jest ustawione na false.
+
+Te konfiguracje wpływają na zachowanie i zarządzanie zasobami w klastrze Hadoopa. 
